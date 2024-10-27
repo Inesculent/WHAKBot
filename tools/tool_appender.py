@@ -6,6 +6,7 @@ import sys
 import re
 import ast
 import subprocess
+from tool_loader import add_tool_to_json
 
 
 def extract_function_name_from_file(file_path: str) -> str:
@@ -56,7 +57,7 @@ class {name_of_class}(BaseModel):
 @tool("{name_of_the_function}", args_schema={name_of_class})
 def {function_name}({arguments}):
     
-    # (Important) Add a docstring here describing what the function does
+    # (Important) Add a docstring here describing what the function does (max 1024 chars)
     
     # Insert the code here
     '''
@@ -95,16 +96,11 @@ def append_to_self(file_name, classMaker):
         return "Error, the file doesn't have a docstring, please try appending again with the necessary arguments"
 
     file_path_raw = file_name.replace(".py", "")
-    tool_entry = f"generated_tools.{file_path_raw}:{tool_function}"
-    print("Currently here!!!")
-    try:
-        with open('generated_tools.txt', "a") as file:
-            if file.tell() != 0:  # If not empty, add a newline before writing
-                file.write("\n")
+    tool_entry = f"generated_tools.{file_path_raw}"
 
-            print("Currently here!")
-            file.write(tool_entry)
-            print(f"Tool appended successfully: {tool_entry.strip()}")
+    print("Attempting to add the tool to JSON")
+    try:
+        add_tool_to_json('generated_tools.json', tool_entry, tool_function)
     except IOError as e:
         print(f"Error writing to file {file_name}: {e}")
 

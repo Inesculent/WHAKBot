@@ -14,6 +14,7 @@ from langgraph.prebuilt import tools_condition
 from sqlconnector import open_connection, insert_data, close_connection
 import os
 import importlib
+from tool_loader import load_tool_from_json
 
 
 class State(TypedDict):
@@ -88,18 +89,16 @@ SCRIPT_AGENT_NAME = "script_agent"
 TAVILY_TOOL = TavilySearchResults(max_results=10, tavily_api_key=os.environ['TAVILY_API_KEY'])
 
 tools = []
-tools_txt_path = 'tools.txt'
+tools_json = 'tools.json'
 
-tools = load_tools_from_txt(tools_txt_path, tools)
+tools = load_tool_from_json(tools_json, tools)
 
-tools_txt_path = 'generated_tools.txt'
-tools = load_tools_from_txt(tools_txt_path, tools)
+tools_json = 'generated_tools.json'
+tools = load_tool_from_json(tools_json, tools)
 
 tool_node = ToolNode(tools)
 
-# Set OpenAI API key from Streamlit secrets
-
-
+#Set up tool path
 primary_assistant_prompt = ChatPromptTemplate.from_messages(
     [
         (

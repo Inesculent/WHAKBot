@@ -1,0 +1,30 @@
+[
+    {
+        "module": "tools.RAG",
+        "function": "SQL_RAG"
+    },
+    {
+        "module": "tools.image_gen",
+        "function": "generate_image"
+    },
+    {
+        "module": "tools.image_gen_flux",
+        "function": "generate_image_flux"
+    },
+    {
+        "module": "tools.get_data",
+        "function": "get_data"
+    },
+    {
+        "module": "tools.tool_creator",
+        "function": "create_tool"
+    },
+    {
+        "module": "tools.tool_appender",
+        "function": "append_to_self"
+    },
+    {
+        "module": "tools.RAG",
+        "function": "RAG_TOOL"
+    }
+]
