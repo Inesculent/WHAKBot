@@ -1,6 +1,7 @@
 import boto3
 import botocore.exceptions
 import json
+import os
 
 
 def updateDatabase(text: str, file_location: str, input_type: str) -> str:
@@ -11,7 +12,10 @@ def updateDatabase(text: str, file_location: str, input_type: str) -> str:
 
     #json_content = json.loads(file_content)
 
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3',
+                      aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                      aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
+                      )
     bucket = 'llm-output-generated'
 
     try:
@@ -62,7 +66,10 @@ def updateDatabase(text: str, file_location: str, input_type: str) -> str:
 
 
 def retriveDatabase(file_location: str, input_type: str) -> str:
-    s3 = boto3.resource('s3')
+    s3 = boto3.client('s3',
+                      aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+                      aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
+                      )
     bucket = 'llm-output-generated'
 
     try:
