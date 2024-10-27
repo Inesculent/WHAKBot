@@ -125,8 +125,6 @@ whisper-timestamped
 win-inet-pton
 yarl
 zipp
-zopfli
-
 langchain-anthropic~=0.1.23
 gTTS~=2.5.3
 boto3~=1.35.21

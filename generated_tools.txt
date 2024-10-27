@@ -1,2 +1,3 @@
 generated_tools.is_prime:is_prime
 generated_tools.lookup_url:lookup_url
+generated_tools.fibonacci:fibonacci

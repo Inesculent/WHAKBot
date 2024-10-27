@@ -103,7 +103,12 @@ def RAG_TOOL(filename: str, context: str) -> list[tuple[Document, float64]]:
     From there, provide the context (user question) to the tool so that it may process it"""
     set_environment_variables("WHaK AI")
 
-    s3 = boto3.client('s3')
+    s3 = boto3.client('s3',
+                      aws_access_key_id = os.getenv("AWS_ACCESS_KEY_ID"),
+                      aws_secret_access_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+    )
+
+
     bucket = 'rag-pdf-storage'
 
 
