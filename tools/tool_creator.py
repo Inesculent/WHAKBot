@@ -125,7 +125,7 @@ def create_tool(tool_code: str, filename: str, arguments: list) -> str:
         return f"Tool was successfully created and executed. Output:\n{result}. Print this output to the user! Don't forget to append the tool now!"
 
     except Exception as e:
-        print(f"Tool creation succeeded, but an error occurred during execution: {e}.")
+        print(f"Tool creation succeeded, but an error occurred during execution: {e}.\n ERROR Detected, passing back to the Agent")
         return f"Tool creation succeeded, but an error occurred during execution: {e}."
 
 

@@ -1,8 +1,10 @@
 from langchain.tools import tool
 from openai import OpenAI
 from pydantic import BaseModel, Field
+from main import set_environment_variables
+import os
 
-CLIENT = OpenAI(api_key="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")
+
 
 
 class GenerateImageInput(BaseModel):
@@ -14,6 +16,9 @@ class GenerateImageInput(BaseModel):
 @tool("generate_image", args_schema=GenerateImageInput)
 def generate_image(image_description: str) -> str:
     """Call to generate an image and make sure to remind the user to ask for a link in order to get it"""
+    set_environment_variables()
+
+    CLIENT = OpenAI(api_key = os.getenv("OPENAI_API_KEY"))
 
     response = CLIENT.images.generate(
         model="dall-e-3",

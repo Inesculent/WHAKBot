@@ -1,15 +1,14 @@
 from pathlib import Path
 import requests
 import base64
+import os
 
 from langchain.tools import tool
 from pydantic import BaseModel, Field
 
 from aws_link import upload_to_aws
+from main import set_environment_variables
 
-#CLIENT = OpenAI(api_key="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")
-
-api_key = "key-1TsWZR2IduvodtQnD8Fz646mavmu3Id500FTck88qAqu98XVQ4k1IfbF6EuPz7GHWUXbpfvFg2Ea4Zio7UKlMvaIdYVxNDpK"
 
 class GenerateImageInput(BaseModel):
     image_description: str = Field(
@@ -21,11 +20,12 @@ class GenerateImageInput(BaseModel):
 def generate_image_flux(image_description: str) -> str:
     """Input must be a SINGLE string. Call to generate an image and make sure to remind the user to ask for a link in order to get it"""
 
+    set_environment_variables()
     url = "https://api.getimg.ai/v1/flux-schnell/text-to-image"
     t2i_headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "authorization": f"Bearer {api_key}"
+        "authorization": f"Bearer {os.getenv('FLUX_API_KEY')}"
     }
 
     t2i_input_params = {

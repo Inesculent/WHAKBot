@@ -45,7 +45,7 @@ class append_tool(BaseModel):
 
     classMaker: str = Field(
     '''
-# Retain original import statements (if any), and append the following imports
+# IMPORTANT: Retain original import statements (if any), and append the following imports
 from pydantic import BaseModel, Field
 from langchain.tools import tool
 
