@@ -1,23 +1,19 @@
 import importlib
 import json
 
-
+#Adds a new tool to the json
 def add_tool_to_json(filepath, module_name, function_name):
 
     # Read the module and function names from the file
     try:
         with open(filepath, 'r') as file:
-
             try:
                 tool_data = json.load(file)
             except json.decoder.JSONDecodeError:
                 print("JSON does not contain the specified data")
                 tool_data = []
-
-
     except FileNotFoundError:
         tool_data = []
-
 
     new_entry = {"module": module_name, "function": function_name}
 
@@ -32,10 +28,10 @@ def add_tool_to_json(filepath, module_name, function_name):
 
     print(f"Successfully added {module_name} {function_name} to JSON")
 
+#To remove a tool from the json
 def remove_tool_from_json(filepath, module_name, function_name):
 
     with open(filepath, 'r') as file:
-
         try:
             tool_data = json.load(file)
         except json.decoder.JSONDecodeError:
@@ -51,10 +47,9 @@ def remove_tool_from_json(filepath, module_name, function_name):
         print(f"Successfully removed {module_name} {function_name} from JSON")
         return
 
-
+#Loads tools from json
 def load_tool_from_json(filepath, tools):
     with open(filepath, 'r') as file:
-
         try:
             tool_data = json.load(file)
         except json.decoder.JSONDecodeError:
@@ -63,10 +58,8 @@ def load_tool_from_json(filepath, tools):
 
         for entry in tool_data:
 
-
             mod_name = entry["module"]
             func_name = entry["function"]
-
             try:
                 # Dynamically import the module
                 module = importlib.import_module(mod_name)

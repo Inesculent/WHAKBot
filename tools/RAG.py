@@ -127,7 +127,6 @@ def RAG_TOOL(filename: str, context: str) -> list[tuple[Document, float64]]:
     documents = [Document(page_content=pdf_text)]
 
 
-    print("here5")
     parser = argparse.ArgumentParser()
     parser.add_argument("--reset", action="store_true", help="Reset the database.")
     args = parser.parse_args()

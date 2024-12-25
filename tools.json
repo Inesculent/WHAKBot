@@ -26,5 +26,9 @@
     {
         "module": "tools.RAG",
         "function": "RAG_TOOL"
+    },
+    {
+        "module": "tools.list_directory_contents",
+        "function": "list_directory_contents"
     }
 ]

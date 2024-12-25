@@ -9,7 +9,7 @@ import subprocess
 
 
 def extract_function_name(tool_code: str) -> str:
-    # A simple regex to extract the function name
+    # Extract function name
     match = re.search(r'def (\w+)\s*\(', tool_code)
     if match:
         return match.group(1)
