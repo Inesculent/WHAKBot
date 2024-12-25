@@ -35,3 +35,11 @@ In order to run the bot, run the command:
 
 into the terminal.
  
+-------------------
+
+Alternatively, the bot has API support using FastAPI. 
+
+Please reference the WHaKBot frontend repository
+https://github.com/Inesculent/whak-bot_ui-master
+
+Requests can be made by running agent.py.
