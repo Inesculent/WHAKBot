@@ -42,4 +42,4 @@ Alternatively, the bot has API support using FastAPI.
 Please reference the WHaKBot frontend repository
 https://github.com/Inesculent/whak-bot_ui-master
 
-Requests can be made by running *agent.py*
+Requests can be made by running ***agent.py***
