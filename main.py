@@ -2,6 +2,7 @@ import os
 from decouple import config
 from datetime import date
 
+
 def set_environment_variables(project_name: str = "") -> None:
     if not project_name:
         project_name = f"Test_{date.today()}"
@@ -10,7 +11,6 @@ def set_environment_variables(project_name: str = "") -> None:
 
     os.environ["AWS_SECRET_ACCESS_KEY"] = "YOUR_KEY_HERE"
 
-        
     os.environ["CHROMADB_TELEMETRY"] = "false"
 
     os.environ["AWS_PASSWORD"] = str("YOUR_KEY_HERE")

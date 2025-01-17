@@ -1,6 +1,5 @@
 import subprocess
 import sys
-
 import boto3
 from langchain_core.messages import AIMessage
 from main import set_environment_variables
@@ -21,7 +20,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import signal
-
 
 
 app = FastAPI()
@@ -62,7 +60,6 @@ class Assistant:
 
 # Function to dynamically load tools from a txt (Replaced with json loader)
 def load_tools_from_txt(filepath, tools):
-
     with open(filepath, 'r') as file:
         for line in file:
             module_name, function_name = line.strip().split(':')
@@ -73,7 +70,7 @@ def load_tools_from_txt(filepath, tools):
                 #Append the function to the tools
                 tools.append(function)
             except (ModuleNotFoundError, AttributeError) as e:
-                # Print error but continue to the next tool
+                # Print error and continue to the next tool
                 print(f"Error: Could not load {module_name}:{function_name}. {e}")
     return tools
 
@@ -153,7 +150,7 @@ agent = workflow.compile()
 printed_messages = set()
 
 
-#This is for user uploaded data. Current unsupported through requests, but the code is provided here.
+# This is for user uploaded data. Currently unsupported through requests, but the code is provided here.
 #uploads = st.file_uploader("Upload file")
 
 #if uploads is not None:
@@ -181,18 +178,19 @@ async def chatbot(prompt: MessageRequest):
 
     try:
 
+        # Append the latest message to the messages "state"
         user_message = prompt.message
         messages.append({"role": "user", "content": user_message})
 
-        #Invoke the model
+        # Invoke the model
         final_state = agent.invoke({"messages": messages})
 
-        #Extract the assistant's response from final_state
+        # Extract the assistant's response from final_state
         assistant_response = final_state.get("messages")
 
 
         if assistant_response:
-            #Get the latest AI message
+            # Get the latest AI message
             if isinstance(assistant_response, list):
                 assistant_response = assistant_response[-1]  # Get the last message
 
@@ -206,7 +204,7 @@ async def chatbot(prompt: MessageRequest):
         else:
             msg_repr = "No messages received."
 
-        #Check the toggle to see if we connect to database
+        # Check the toggle to see if we connect to database
         if on:
             conn = open_connection()
             user_input = messages[-2]["content"]
@@ -219,13 +217,12 @@ async def chatbot(prompt: MessageRequest):
 
         return {"response": msg_repr}
 
-
-
+    # If there is an issue with the model
     except Exception as e:
         return(f"Error invoking the model: {e}")
 
 
-#To reload the application after appending
+# To reload the application after appending
 @app.post("/reload")
 async def reload_server():
     # Start a new subprocess for Uvicorn to reload the application

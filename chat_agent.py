@@ -15,7 +15,6 @@ from sqlconnector import open_connection, insert_data, close_connection
 import os
 import importlib
 from tool_loader import load_tool_from_json
-import signal
 
 
 class State(TypedDict):
@@ -44,7 +43,7 @@ class Assistant:
                 break
         return {"messages": result}
 
-#Deprecated, load tools from JSON instgead.
+# Deprecated, load tools from JSON instead.
 def load_tools_from_txt(filepath, tools):
 
     # Read the module and function names from the file
